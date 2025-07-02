@@ -1,0 +1,207 @@
+.header {
+  background: linear-gradient(
+    270deg,
+    // deep brown-orange
+    #4a2a08,
+    // dark brown
+    #301d05,
+    // very dark brown
+    #180f02,
+
+    // near-black brown
+    #301d05,
+    // repeat for smoothness
+    #4a2a08
+  );
+  background-size: 2000% 2000%;
+  animation: gradientMove 10s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  position: relative;
+  transition: all 0.5s ease;
+
+  &-logo {
+    &-img {
+      width: 15rem;
+      height: 8rem;
+      object-fit: contain;
+      margin-left: 3rem;
+      transform: scale(1.5);
+      transition: all 0.3s ease;
+
+      @media only screen and (max-width: $bp-medium) {
+        margin-left: 0.5rem;
+      }
+      &:hover {
+        transform: scale(1.6);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-nav {
+    &-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6rem;
+      list-style: none;
+      margin-right: 3rem;
+      transition: all 0.3s ease;
+      &-item {
+        &-link {
+          text-decoration: none;
+          color: var(--color-white);
+          font-size: 2rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          position: relative;
+          z-index: 1;
+          padding: 0 1rem;
+
+          &:hover {
+            color: var(--color-black);
+          }
+
+          span {
+            display: block;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-white);
+            transition: all 0.3s ease;
+            transform: scale(0);
+            transform-origin: center;
+            z-index: -1;
+          }
+
+          &:hover span {
+            transform: scale(1, 0.9);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-white);
+            transition: all 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: left;
+          }
+          &:hover::after {
+            transform: scaleX(1);
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-white);
+            transition: all 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+          }
+          &:hover::before {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-medium) {
+      display: none;
+    }
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.header.sticky + .header-spacer {
+  height: 8.3rem;
+  transition: height 0.3s ease;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.show-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  background-color: #0000002a;
+  padding: 2rem;
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s ease;
+  transform: translateY(-100%);
+
+  &-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+}
+
+.show-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: all 1s ease;
+}
+
+.ri-close-large-fill {
+  font-size: 3rem;
+  color: var(--color-white);
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: red;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    display: block;
+  }
+}
